@@ -15,18 +15,19 @@ const Shop = () => {
   const [cart,setCart] = useState([]);
 
   const handleProduct = (product) => {
-    // console.log('product added',product);
     const newCart = [...cart,product];
     setCart(newCart);
   }
 
   return (
     <div className="shop-container">
+
       <div className="product-container">
         {
-          products.map((product,index)=> <Product key={index} product={product} handleProduct={handleProduct}></Product>)
+          products.map((product,index)=> <Product key={index} showCart={true} product={product} handleProduct={handleProduct}></Product>)
         }
       </div>
+
        <div className="cart-container">
          <Cart cart={cart}></Cart>
        </div>
