@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 function Cart(props) {
   const cart = props.cart;
 
-  const totalPrice = cart.reduce((total,product) => total + product.price,0);
+  const totalPrice = cart.reduce((total,product) => total + product.price*product.quantity,0);
+
+  debugger;
 
   let shipping = 0;
   if(totalPrice>35) {
@@ -35,5 +37,4 @@ function Cart(props) {
     </div>
   )
 }
-
 export default Cart
