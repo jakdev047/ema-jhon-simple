@@ -1,12 +1,21 @@
 import React, {useEffect,useState} from 'react';
-import { getDatabaseCart, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
 
+import happyImage from '../../images/giphy.gif';
+
 const Review = () => {
   // data fetch
   const [cart, setCart] = useState([]);
+  const [orderPlaced,setOrderPlaced] = useState(false);
+
+  const handlePlaceholder = () => {
+    setCart([]);
+    setOrderPlaced(true);
+    processOrder();
+  }
   // data load
   useEffect(()=> {
     // cart data load from local storage
@@ -25,6 +34,12 @@ const Review = () => {
     setCart(newCart);
     removeFromDatabaseCart(productKeys);
   }
+  
+  // thanks for placeorder
+  let  thankyou;
+  if(orderPlaced) {
+    thankyou = <img src={happyImage} alt="alt"/>;
+  }
   return (
     <div className="twin-container"> 
       <div className="product-container">
@@ -32,9 +47,12 @@ const Review = () => {
           cart.map(pd=>
             <ReviewItem key={pd.key} product={pd} removeProduct={removeProduct}></ReviewItem>)
         }
+        { thankyou }
       </div>
       <div className="cart-container">
-        <Cart cart={cart}></Cart>
+        <Cart cart={cart}>
+          <button onClick={handlePlaceholder} className="main-btn">Place Order</button>
+        </Cart>
       </div>
     </div>
   );
