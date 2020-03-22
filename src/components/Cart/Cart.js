@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useAuth } from '../Login/useAuth';
 
 
 function Cart(props) {
@@ -18,6 +19,10 @@ function Cart(props) {
   }
 
   const tax = Math.round(totalPrice/10).toFixed(2);
+
+  // contextapi use
+  // const auth = useAuth();
+  // console.log(auth.user);
 
   return (
     <div>

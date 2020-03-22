@@ -11,11 +11,14 @@ import Review from './components/Review/Review';
 import Inventory from './components/Inventory/Inventory';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import NoMatch from './components/NoMatch/NoMatch';
+import Login from './components/Login/Login';
+import { AuthContextProvider,PrivateRoute } from './components/Login/useAuth';
+import Shipping from './components/Shipping/Shipping';
 
 class App extends Component {
   render() {
     return (
-      <>
+      <AuthContextProvider>
         <Header></Header>
         <Router>
           <Fragment>
@@ -38,13 +41,19 @@ class App extends Component {
               <Route path='/product/:productKey'>
                 <ProductDetails />
               </Route>
+              <Route path="/login">
+                <Login></Login>
+              </Route>
+              <PrivateRoute path='/shipping'>
+                <Shipping></Shipping>
+              </PrivateRoute>
               <Route path='*'>
                 <NoMatch />
               </Route>
             </Switch>
           </Fragment>
         </Router>
-      </>
+      </AuthContextProvider>
     );
   }
 }
