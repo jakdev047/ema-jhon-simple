@@ -29,9 +29,6 @@ class App extends Component {
               <Route path='/review'>
                 <Review />
               </Route>
-              <Route path='/review'>
-                <Review />
-              </Route>
               <Route path='/inventory'>
                 <Inventory />
               </Route>

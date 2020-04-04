@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import fakeData from '../../fakeData';
 
 import './Shop.css';
 
@@ -9,25 +8,34 @@ import Cart from '../Cart/Cart';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 
 const Shop = () => {
-  // fetch data
-  const firstTenData = fakeData.slice(0,10);
-  const [products,setProducts] = useState(firstTenData);
+
+  // fetch product data
+  const [products,setProducts] = useState([]);
+  useEffect(()=>{
+    fetch('https://morning-fortress-29937.herokuapp.com/products')
+    .then(res=>res.json())
+    .then(data=> {
+      setProducts(data);
+    })
+    .catch(error=>console.log(error));
+  },[])
 
   // fetch cart data
   const [cart,setCart] = useState([]);
-
-  // 
   useEffect(()=>{
     // cart data load from local storage
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-    const cartProducts = productKeys.map(key => {
-      const product = fakeData.find(pd => pd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
-    setCart(cartProducts);
-  },[])
+    if(products.length) {
+      const cartProducts = productKeys.map(key => {
+        const product = products.find(pd => pd.key === key);
+        product.quantity = savedCart[key];
+        return product;
+      });
+      setCart(cartProducts);
+    }
+    
+  },[products])
 
   const handleProduct = (product) => {
     const productToBeAddedKey = product.key;  // to collect product key by click

@@ -1,9 +1,32 @@
 import React from 'react';
+// import fakeData from '../../fakeData';
 
 const Inventory = () => {
+
+  // const handleInventory = () => {
+  //   console.log(fakeData[0]);
+
+  //   // const product = fakeData[0];
+  //   fetch('https://morning-fortress-29937.herokuapp.com/addproduct', {
+  //     method:'POST',
+  //     body: JSON.stringify(fakeData),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   .then(res=>res.json())
+  //   .then(data=> {
+  //     console.log(data)
+  //   })
+  //   .catch(error => console.log(error)); 
+  // }
+
   return (
     <div>
-      <h2>Inventory Commminng soon...</h2>
+      <div className="container">
+        <h2>Add Inventory to sale more...</h2>
+        {/* <button onClick={handleInventory}>Add Inventory</button> */}
+      </div>
     </div>
   );
 };
